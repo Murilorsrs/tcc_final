@@ -1,0 +1,4 @@
+SELECT * FROM tcc_final.cadastrousuario;
+ALTER TABLE cadastroUsuario MODIFY telefone VARCHAR(20);
+
+select * from cadastrousuario
