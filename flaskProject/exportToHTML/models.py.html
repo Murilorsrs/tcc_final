@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>models.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+models.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">flask_sqlalchemy </span><span class="s0">import </span><span class="s1">SQLAlchemy</span>
+<span class="s0">from </span><span class="s1">datetime </span><span class="s0">import </span><span class="s1">datetime</span>
+
+<span class="s1">db </span><span class="s2">= </span><span class="s1">SQLAlchemy</span><span class="s2">()</span>
+
+
+<span class="s0">class </span><span class="s1">Usuario</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Model</span><span class="s2">):</span>
+    <span class="s1">__tablename__ </span><span class="s2">= </span><span class="s3">'cadastroUsuario'</span>
+    <span class="s1">id_usuario </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Integer</span><span class="s2">, </span><span class="s1">primary_key</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+    <span class="s1">nome </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">String</span><span class="s2">(</span><span class="s4">100</span><span class="s2">))</span>
+    <span class="s1">email </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">String</span><span class="s2">(</span><span class="s4">254</span><span class="s2">))</span>
+    <span class="s1">telefone </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">String</span><span class="s2">(</span><span class="s4">20</span><span class="s2">))</span>
+    <span class="s1">senha </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">String</span><span class="s2">(</span><span class="s4">100</span><span class="s2">))</span>
+
+
+<span class="s0">class </span><span class="s1">Configuracao</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Model</span><span class="s2">):</span>
+    <span class="s1">__tablename__ </span><span class="s2">= </span><span class="s3">'configuracoes'</span>
+    <span class="s1">id_config </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Integer</span><span class="s2">, </span><span class="s1">primary_key</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+    <span class="s1">id_usuario </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Integer</span><span class="s2">, </span><span class="s1">db</span><span class="s2">.</span><span class="s1">ForeignKey</span><span class="s2">(</span><span class="s3">'cadastroUsuario.id_usuario'</span><span class="s2">), </span><span class="s1">nullable</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+    <span class="s1">umidade_min </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Numeric</span><span class="s2">, </span><span class="s1">nullable</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+    <span class="s1">umidade_max </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Numeric</span><span class="s2">, </span><span class="s1">nullable</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+    <span class="s1">usuario </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">relationship</span><span class="s2">(</span><span class="s3">'Usuario'</span><span class="s2">, </span><span class="s1">backref</span><span class="s2">=</span><span class="s1">db</span><span class="s2">.</span><span class="s1">backref</span><span class="s2">(</span><span class="s3">'configuracoes'</span><span class="s2">, </span><span class="s1">lazy</span><span class="s2">=</span><span class="s0">True</span><span class="s2">))</span>
+
+
+<span class="s0">class </span><span class="s1">AgendaIrrigacaoAutomatica</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Model</span><span class="s2">):</span>
+    <span class="s1">__tablename__ </span><span class="s2">= </span><span class="s3">'agendaIrrigacaoAutomatica'</span>
+    <span class="s1">id_agendaAuto </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Integer</span><span class="s2">, </span><span class="s1">primary_key</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+    <span class="s1">id_usuario </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Integer</span><span class="s2">, </span><span class="s1">db</span><span class="s2">.</span><span class="s1">ForeignKey</span><span class="s2">(</span><span class="s3">'cadastroUsuario.id_usuario'</span><span class="s2">), </span><span class="s1">nullable</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+    <span class="s1">data_ini </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Date</span><span class="s2">, </span><span class="s1">nullable</span><span class="s2">=</span><span class="s0">False</span><span class="s2">)</span>
+    <span class="s1">data_fim </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Date</span><span class="s2">, </span><span class="s1">nullable</span><span class="s2">=</span><span class="s0">False</span><span class="s2">)</span>
+    <span class="s1">hora_ini </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Time</span><span class="s2">, </span><span class="s1">nullable</span><span class="s2">=</span><span class="s0">False</span><span class="s2">)</span>
+    <span class="s1">id_config </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span><span class="s1">db</span><span class="s2">.</span><span class="s1">Integer</span><span class="s2">, </span><span class="s1">db</span><span class="s2">.</span><span class="s1">ForeignKey</span><span class="s2">(</span><span class="s3">'configuracoes.id_config'</span><span class="s2">), </span><span class="s1">nullable</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+
+    <span class="s1">usuario </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">relationship</span><span class="s2">(</span><span class="s3">'Usuario'</span><span class="s2">, </span><span class="s1">backref</span><span class="s2">=</span><span class="s1">db</span><span class="s2">.</span><span class="s1">backref</span><span class="s2">(</span><span class="s3">'agendas'</span><span class="s2">, </span><span class="s1">lazy</span><span class="s2">=</span><span class="s0">True</span><span class="s2">))</span>
+    <span class="s1">configuracao </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">relationship</span><span class="s2">(</span><span class="s3">'Configuracao'</span><span class="s2">, </span><span class="s1">backref</span><span class="s2">=</span><span class="s1">db</span><span class="s2">.</span><span class="s1">backref</span><span class="s2">(</span><span class="s3">'agendas'</span><span class="s2">, </span><span class="s1">lazy</span><span class="s2">=</span><span class="s0">True</span><span class="s2">))</span>
+
+</pre>
+</body>
+</html>

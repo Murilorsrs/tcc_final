@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Agenda de Irrigação Automática</title>
+</head>
+<body>
+    <h1>Agenda de Irrigação Automática</h1>
+    <form action="{{ url_for('agenda') }}" method="post">
+        <label for="id_usuario">ID do Usuário:</label>
+        <input type="text" id="id_usuario" name="id_usuario" required><br><br>
+
+        <label for="data_ini">Data de Início:</label>
+        <input type="date" id="data_ini" name="data_ini" required><br><br>
+
+        <label for="data_fim">Data de Fim:</label>
+        <input type="date" id="data_fim" name="data_fim" required><br><br>
+
+        <label for="hora_ini">Hora de Início:</label>
+        <input type="time" id="hora_ini" name="hora_ini" required><br><br>
+
+        <label for="id_config">ID da Configuração:</label>
+        <input type="text" id="id_config" name="id_config" required><br><br>
+
+        <input type="submit" value="Salvar">
+    </form>
+</body>
+</html>

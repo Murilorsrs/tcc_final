@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Login</h1>
+
+    <!-- Formulário de Login -->
+    <form method="post" action="{{ url_for('login') }}">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <input type="submit" value="Login">
+    </form>
+
+    <!-- Link para Registro -->
+    <p>Não tem uma conta? <a href="{{ url_for('register') }}">Registre-se aqui</a></p>
+</body>
+</html>
