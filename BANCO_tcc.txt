@@ -1,0 +1,45 @@
+CREATE TABLE cadastroUsuario(
+  id_usuario int primary key AUTO_INCREMENT,
+  nome VARCHAR(100),
+  email VARCHAR(254),
+  telefone NUMERIC,
+  senha VARCHAR(100)
+);
+
+CREATE TABLE configuracoes(
+    id_config INT PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT DEFAULT NULL,
+    umidade_min NUMERIC,
+    umidade_max NUMERIC,
+
+    KEY id_usuario (id_usuario),
+    CONSTRAINT configuracoes FOREIGN KEY (id_usuario) REFERENCES cadastroUsuario (id_usuario)
+);
+
+CREATE TABLE agendaIrrigacaoAutomatica (
+    id_agendaAuto INT PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT DEFAULT NULL,
+    data_ini DATE,
+    data_fim DATE,
+    hora_ini TIME,
+    id_config INT DEFAULT NULL,
+
+    CONSTRAINT fk_usuarioagendairrigacaoautomatica
+        FOREIGN KEY (id_usuario) REFERENCES cadastroUsuario (id_usuario),
+
+    CONSTRAINT fk_config
+        FOREIGN KEY (id_config) REFERENCES configuracoes (id_config)
+);
+
+CREATE TABLE agendaIrrigacaoManual (
+    id_agendaManu INT PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT,
+    data_ini DATE,
+    data_fim DATE,
+    hora_ini TIME,
+    hora_fim TIME,
+    id_config INT,
+
+    CONSTRAINT fk_usuario_agendaManual FOREIGN KEY (id_usuario) REFERENCES cadastroUsuario (id_usuario),
+    CONSTRAINT fk_config_agendaManual FOREIGN KEY (id_config) REFERENCES configuracoes (id_config)
+);
